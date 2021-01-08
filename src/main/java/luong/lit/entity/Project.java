@@ -39,4 +39,8 @@ public class Project {
     public Date getUpdatedAt() {
         return updatedAt;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

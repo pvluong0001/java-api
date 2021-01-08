@@ -2,6 +2,8 @@ package luong.lit.api;
 
 import luong.lit.entity.Project;
 import luong.lit.repository.ProjectRepository;
+import luong.lit.response.DataResponse;
+import luong.lit.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +15,16 @@ public class ProjectController {
     private ProjectRepository projectRepository;
 
     @GetMapping()
-    public Iterable<Project> all() {
-        return projectRepository.findAll();
+    public DataResponse all() {
+        return new DataResponse(projectRepository.findAll());
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Project resource) {
-        projectRepository.save(resource);
+    public DataResponse create(@RequestBody Project resource) {
+        Project project = projectRepository.save(resource);
+        System.out.println(project);
+
+        return new DataResponse(project);
     }
 }
